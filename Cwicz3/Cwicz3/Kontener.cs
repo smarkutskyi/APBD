@@ -23,7 +23,7 @@ public abstract class Kontener
     }
 
 
-    public void oproznienieLadunku()
+    public virtual void oproznienieLadunku()
     {
         _masaLadunku = 0;
     }

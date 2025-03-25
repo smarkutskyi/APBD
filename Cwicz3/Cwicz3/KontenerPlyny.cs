@@ -3,12 +3,12 @@ namespace Cwicz3;
 public class KontenerPlyny : Kontener, IHazardNotifier
 {
 
-    private bool niebezpieczny; 
+    private bool _niebezpieczny; 
 
     public KontenerPlyny(double masaLadunku, double wysokosc, double wagaWlasna, double glebokosc, double maksymalnaLadownosc, bool niebezpieczny) 
         : base(masaLadunku, wysokosc, wagaWlasna, glebokosc, maksymalnaLadownosc)
     {
-        this.niebezpieczny = niebezpieczny;
+        this._niebezpieczny = niebezpieczny;
     }
 
     public override string pobieramyTyp()
@@ -24,13 +24,13 @@ public class KontenerPlyny : Kontener, IHazardNotifier
     public override void zaladowanieLadunku(double masaLadunku)
     {
         
-        if (niebezpieczny)
+        if (_niebezpieczny)
         {
             if (masaLadunku >= (_maksymalnaLadownosc * 0.5) )
             {
                 powiadomienie("Za duża masa ladunku dla niebiezpicznego towaru!");
                 
-                throw new OverfillException("Za duża masa");
+                throw new OverfillException("Za duża masa"); // nie wiem co musi być albo bląd albo powiadomienie 
             }
         } else
         {
@@ -47,6 +47,7 @@ public class KontenerPlyny : Kontener, IHazardNotifier
         
         
     }
+    
     
     
     

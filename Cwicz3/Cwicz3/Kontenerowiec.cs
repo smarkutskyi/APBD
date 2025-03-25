@@ -16,4 +16,5 @@ public class Kontenerowiec
         this.wagaSumyKontenerow = wagaSumyKontenerow;
     }
     
+    
 }

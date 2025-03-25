@@ -3,11 +3,11 @@ namespace Cwicz3;
 public abstract class Kontener
 {
     private double _masaLadunku { get; set; }
-    private double _wysokosc { get; set; }
-    private double _wagaWlasna { get; set; }
-    private double _glebokosc { get; set; }
-    private String _numerSeryjny { get; set; }
-    private double _maksymalnaLadownosc { get; set; }
+    private double _wysokosc { get;}
+    private double _wagaWlasna { get;}
+    private double _glebokosc { get; }
+    private String _numerSeryjny { get;}
+    private double _maksymalnaLadownosc { get;}
 
 
     public void oproznienieLadunku()
@@ -19,7 +19,7 @@ public abstract class Kontener
     {
         if (masaLadunku > _maksymalnaLadownosc)
         {
-            //throw new OverfillException();
+            throw new OverfillException("Masa ladunku jest za duża!");
         }
         
         this._masaLadunku = masaLadunku;

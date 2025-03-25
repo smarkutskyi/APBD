@@ -2,18 +2,28 @@ namespace Cwicz3;
 
 public class Kontenerowiec
 {
-    private List<Kontener> kontener { get; }
+    public List<Kontener> kontenery { get; }
     
-    private double maksPredkosc { get;}
-    private int liczbaKontenerow { get; }
-    private double wagaSumyKontenerow { get; }
+    public double maksPredkosc { get;}
+    public int liczbaKontenerow { get; }
+    public double wagaSumyKontenerow { get; }
 
-    public Kontenerowiec(List<Kontener> kontener, double maksPredkosc, int liczbaKontenerow, double wagaSumyKontenerow)
+    public Kontenerowiec( double maksPredkosc, int liczbaKontenerow, double wagaSumyKontenerow)
     {
-        this.kontener = kontener;
+        this.kontenery = kontenery;
         this.maksPredkosc = maksPredkosc;
         this.liczbaKontenerow = liczbaKontenerow;
         this.wagaSumyKontenerow = wagaSumyKontenerow;
+    }
+
+    public void dodajKontener(Kontener kontener)
+    {
+        this.kontenery.Add(kontener);
+    }
+
+    public void usunKontener(Kontener kontener)
+    {
+        this.kontenery.Remove(kontener);
     }
     
     

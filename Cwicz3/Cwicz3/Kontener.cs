@@ -2,11 +2,11 @@ namespace Cwicz3;
 
 public abstract class Kontener
 {
-    protected double _masaLadunku { get; set; }
+    public double _masaLadunku { get; set; }
     protected double _wysokosc { get;}
-    protected double _wagaWlasna { get;}
+    public double _wagaWlasna { get;}
     protected double _glebokosc { get; }
-    protected string _numerSeryjny { get; }
+    public string _numerSeryjny { get; }
     protected double _maksymalnaLadownosc { get;}
 
     private static int index = 0;

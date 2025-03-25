@@ -2,18 +2,18 @@ namespace Cwicz3;
 
 public abstract class Kontener
 {
-    private double _masaLadunku { get; set; }
-    private double _wysokosc { get;}
-    private double _wagaWlasna { get;}
-    private double _glebokosc { get; }
-    private String _numerSeryjny { get;}
-    private double _maksymalnaLadownosc { get;}
+    protected double _masaLadunku { get; set; }
+    protected double _wysokosc { get;}
+    protected double _wagaWlasna { get;}
+    protected double _glebokosc { get; }
+    protected string _numerSeryjny { get; }
+    protected double _maksymalnaLadownosc { get;}
 
     private static int index = 0;
 
     protected Kontener(double masaLadunku, double wysokosc, double wagaWlasna, double glebokosc, double maksymalnaLadownosc)
     {
-        _numerSeryjny = 
+        _numerSeryjny = tworzynyNumerSeryjny();
         _masaLadunku = masaLadunku;
         _wysokosc = wysokosc;
         _wagaWlasna = wagaWlasna;
@@ -28,7 +28,7 @@ public abstract class Kontener
         _masaLadunku = 0;
     }
 
-    public void zaladowanieLadunku(double masaLadunku)
+    public virtual void zaladowanieLadunku(double masaLadunku)
     {
         if (masaLadunku > _maksymalnaLadownosc)
         {

@@ -9,6 +9,19 @@ public abstract class Kontener
     private String _numerSeryjny { get;}
     private double _maksymalnaLadownosc { get;}
 
+    private static int index = 0;
+
+    protected Kontener(double masaLadunku, double wysokosc, double wagaWlasna, double glebokosc, double maksymalnaLadownosc)
+    {
+        _numerSeryjny = 
+        _masaLadunku = masaLadunku;
+        _wysokosc = wysokosc;
+        _wagaWlasna = wagaWlasna;
+        _glebokosc = glebokosc;
+        _maksymalnaLadownosc = maksymalnaLadownosc;
+        
+    }
+
 
     public void oproznienieLadunku()
     {
@@ -25,9 +38,19 @@ public abstract class Kontener
         this._masaLadunku = masaLadunku;
         
     }
+
+    public string tworzynyNumerSeryjny()
+    {
+        index++;
+        return "KON-" + pobieramyTyp() + "-" + index.ToString();
+    }
+
+    public abstract string pobieramyTyp(); 
     
     
-    
-    
-    
+
+
+
+
+
 }

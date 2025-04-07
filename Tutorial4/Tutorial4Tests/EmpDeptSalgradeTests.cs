@@ -55,13 +55,13 @@ public class EmpDeptSalgradeTests
     {
         var emps = Database.GetEmps();
 
-        //var result = null; 
+        var result = emps.Select(e => new {e.EName, e.Sal}).ToList(); 
         
-        // Assert.All(result, r =>
-        // {
-        //     Assert.False(string.IsNullOrWhiteSpace(r.EName));
-        //     Assert.True(r.Sal > 0);
-        // });
+         Assert.All(result, r =>
+         {
+             Assert.False(string.IsNullOrWhiteSpace(r.EName));
+             Assert.True(r.Sal > 0);
+         });
     }
 
     // 5. JOIN Emp to Dept
@@ -72,9 +72,12 @@ public class EmpDeptSalgradeTests
         var emps = Database.GetEmps();
         var depts = Database.GetDepts();
 
-        //var result = null; 
+        var result = emps.Join(depts,
+            e => e.DeptNo,
+            d => d.DeptNo,
+            (emp, dept) => new {emp.EName, dept.DName}).ToList(); 
 
-        //Assert.Contains(result, r => r.DName == "SALES" && r.EName == "ALLEN");
+        Assert.Contains(result, r => r.DName == "SALES" && r.EName == "ALLEN");
     }
 
     // 6. Group by DeptNo
@@ -84,9 +87,9 @@ public class EmpDeptSalgradeTests
     {
         var emps = Database.GetEmps();
 
-        // var result = null; 
-        //
-        // Assert.Contains(result, g => g.DeptNo == 30 && g.Count == 2);
+        var result = emps.GroupBy(e => e.DeptNo).Select(e => new {DeptNo = e.Key, Count = e.Count()}).ToList();
+        
+        Assert.Contains(result, g => g.DeptNo == 30 && g.Count == 2);
     }
 
     // 7. SelectMany (simulate flattening)

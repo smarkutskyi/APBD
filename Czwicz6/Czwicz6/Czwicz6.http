@@ -1,0 +1,6 @@
+@Czwicz6_HostAddress = http://localhost:5246
+
+GET {{Czwicz6_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

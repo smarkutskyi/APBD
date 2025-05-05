@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<ITripsServices, TripsServices>();
+builder.Services.AddScoped<IClientsServices, ClientsServices>();
 
 var app = builder.Build();
 

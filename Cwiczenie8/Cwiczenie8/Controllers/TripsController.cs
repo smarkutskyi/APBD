@@ -16,22 +16,15 @@ namespace Cwiczenie8.Controllers
             _tripsServices = tripsServices;
         }
         
-        [HttpGet]
+        [HttpGet] // zwraca dane o podróżach i w jakich krajach ona była
         public async Task<IActionResult> GetTrips()
         {
             var trips = await _tripsServices.GetTripsAsync();
-            return Ok(trips);
             
+            
+            return Ok(trips);
         }
         
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTripsById(int id)
-        {
-            //if (!await _tripsServices.DoesTripExist(id))
-            
-            return Ok();
-            
-        }
         
         
         

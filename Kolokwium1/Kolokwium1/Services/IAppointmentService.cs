@@ -6,5 +6,5 @@ public interface IAppointmentService
 {
     Task<HistoryAppointmentDTO> GetAppointmentsHistory(int userId);
     
-    Task AddAppointment(AddAppointmentDTO addAppointment);
+    // Task AddAppointment(AddAppointmentDTO addAppointment);
 }

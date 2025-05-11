@@ -158,36 +158,23 @@ public class WarehouseService : IWarehouseService
             
             return (int) result;
         }
-        catch (SqlException ex)
-        {
-            
-            if (ex.Message.Contains("Invalid parameter: Provided IdProduct does not exist"))
+        catch (SqlException e) // w RAISERROR zmieniamy status błedu na 1,2,3 czyli
+        {                           //RAISERROR('Invalid parameter: Provided IdProduct does not exist', 18, 1);
+                                        //RAISERROR('Invalid parameter: There is no order to fullfill', 18, 2);
+                                        //...
+            return e.State switch
             {
-                
-                throw new NotFoundException("Produkt nie istnieje w bazie danych");
-                
-            }
-            
-            if (ex.Message.Contains("Invalid parameter: There is no order to fullfill"))
-            {
-                
-                throw new NotFoundException("Nie znaleziono pasującego zamówienia");
-            }
-            
-            if (ex.Message.Contains("Invalid parameter: Provided IdWarehouse does not exist"))
-            {
-                
-                throw new NotFoundException("Magazyn nie istnieje");
-            }
-
-            
-            throw new ConflictException("Przeszkoda w dodawaniu produktu do magazynu: " + ex.Message);
+                1 => throw new NotFoundException(e.Message),         
+                2 => throw new NotFoundException(e.Message),       
+                3 => throw new NotFoundException(e.Message),    
+                   
+            };
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            
-            throw new Exception("Wystąpił błąd podczas dodawania produktu do magazynu: " + ex.Message);
+            throw;
         }
+        
     
     }
 }

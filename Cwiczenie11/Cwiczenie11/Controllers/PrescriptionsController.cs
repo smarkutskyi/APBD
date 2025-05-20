@@ -19,13 +19,17 @@ namespace Cwiczenie11.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddPrescription([FromBody] ReceptaDTO dto)
         {
+            
             try
             {
+                
                 await _dbService.DodanieNowejReceptyAsync(dto); 
-                return Created("", new { message = "Recepta została dodana." });
+                return Created("", 
+                    new { message = "Recepta została dodana." });
             }
             catch (NotFoundException ex)
             {
+                
                 return NotFound(new { error = ex.Message });
             }
             catch (ConflictException ex)

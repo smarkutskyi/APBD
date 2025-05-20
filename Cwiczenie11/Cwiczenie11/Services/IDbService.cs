@@ -6,4 +6,7 @@ public interface IDbService
 {
     Task DodanieNowejReceptyAsync(ReceptaDTO receptaDTO);
     
+    Task<PacjentGetDTO> GetPacjenciAsync(int id);
+    
+    
 }

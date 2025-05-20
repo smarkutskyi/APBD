@@ -4,6 +4,7 @@ using Cwiczenie11.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cwiczenie11.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250520174646_AddedRecordsInPatient")]
+    partial class AddedRecordsInPatient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,24 +186,6 @@ namespace Cwiczenie11.Migrations
                     b.HasIndex("IdPatient");
 
                     b.ToTable("Prescription");
-
-                    b.HasData(
-                        new
-                        {
-                            IdPrescription = 2,
-                            Date = new DateOnly(2025, 5, 20),
-                            DueDate = new DateOnly(2025, 5, 20),
-                            IdDoctor = 1,
-                            IdPatient = 1
-                        },
-                        new
-                        {
-                            IdPrescription = 3,
-                            Date = new DateOnly(2025, 5, 20),
-                            DueDate = new DateOnly(2025, 5, 20),
-                            IdDoctor = 1,
-                            IdPatient = 1
-                        });
                 });
 
             modelBuilder.Entity("Cwiczenie11.Model.PrescriptionMedicament", b =>
@@ -224,29 +209,6 @@ namespace Cwiczenie11.Migrations
                     b.HasIndex("IdMedicament");
 
                     b.ToTable("Prescription_Medicament");
-
-                    b.HasData(
-                        new
-                        {
-                            IdPrescription = 2,
-                            IdMedicament = 1,
-                            Details = "Paracetamol",
-                            Dose = 7
-                        },
-                        new
-                        {
-                            IdPrescription = 3,
-                            IdMedicament = 2,
-                            Details = "Ibuprofen",
-                            Dose = 7
-                        },
-                        new
-                        {
-                            IdPrescription = 3,
-                            IdMedicament = 3,
-                            Details = "Opium",
-                            Dose = 3
-                        });
                 });
 
             modelBuilder.Entity("Cwiczenie11.Model.Prescription", b =>

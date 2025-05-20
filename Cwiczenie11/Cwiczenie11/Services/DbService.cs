@@ -83,4 +83,52 @@ public class DbService : IDbService
 
 
     }
+    public async Task<PacjentGetDTO> GetPacjenciAsync(int id)
+    {
+        var pacjent = await _context.Patients
+            .AsNoTracking()
+            .Include(p => p.Prescriptions)
+            .ThenInclude(pr => pr.PrescriptionMedicaments)
+            .ThenInclude(pm => pm.Medicament)
+            .Include(p => p.Prescriptions)
+            .ThenInclude(pr => pr.Doctor)
+            .FirstOrDefaultAsync(p => p.IdPatient == id);
+
+        if (pacjent == null)
+            throw new NotFoundException($"Pacjent o id: {id} nie istnieje.");
+
+        var pacjentReturn = new PacjentGetDTO()
+        {
+            IdPatient = pacjent.IdPatient,
+            FirstName = pacjent.FirstName,
+            LastName = pacjent.LastName,
+            BirthDate = pacjent.BirthDate,
+            Prescriptions = pacjent.Prescriptions
+                .OrderBy(p => p.DueDate)
+                .Select(pr => new ReceptaGetDTO()
+                {
+                    IdPrescription = pr.IdPrescription,
+                    Date = pr.Date,
+                    DueDate = pr.DueDate,
+                    Doctor = new DoctorGetDTO()
+                    {
+                        IdDoctor = pr.Doctor.IdDoctor,
+                        FirstName = pr.Doctor.FirstName,
+                        LastName = pr.Doctor.LastName
+                    },
+                    Medicaments = pr.PrescriptionMedicaments
+                        .Select(pm => new MedicamentGetDTO()
+                        {
+                            IdMedicament = pm.Medicament.IdMedicament,
+                            Name = pm.Medicament.Name,
+                            Dose = pm.Dose,
+                            Description = pm.Details
+                        }).ToList()
+                }).ToList()
+        };
+
+        return pacjentReturn;
+    }
+
+    
 }

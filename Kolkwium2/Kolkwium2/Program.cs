@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PrzykladowyKolokwium2za2024.Data;
+
 using PrzykladowyKolokwium2za2024.Services;
 
 var builder = WebApplication.CreateBuilder(args);
